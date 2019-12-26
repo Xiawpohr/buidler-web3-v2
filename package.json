@@ -1,17 +1,19 @@
 {
   "name": "@xiawpohr/buidler-web3-v2",
   "version": "0.1.0",
-  "description": "Buidler TypeScript plugin boilerplate",
-  "repository": "github:nomiclabs/buidler-ts-plugin-boilerplate",
-  "author": "Nomic Labs LLC",
+  "description": "Buidler plugin for using Web3 2.x",
+  "repository": "git@github.com:Xiawpohr/buidler-web3-v2.git",
+  "author": "xiawpohr",
   "license": "MIT",
-  "main": "dist/src/index.js",
-  "types": "dist/src/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "keywords": [
     "ethereum",
     "smart-contracts",
     "buidler",
-    "buidler-plugin"
+    "buidler-plugin",
+    "web3",
+    "web3.js"
   ],
   "scripts": {
     "lint:fix": "./node_modules/.bin/prettier --write 'src/**/*.{js,ts}' 'test/**/*.{js,ts}' && npm run lint-src -- --fix && npm run lint-tests -- --fix",
@@ -24,7 +26,7 @@
     "clean": "rm -rf dist build-test"
   },
   "files": [
-    "dist/src/",
+    "dist/",
     "src/",
     "LICENSE",
     "README.md"
