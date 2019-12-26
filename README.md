@@ -1,57 +1,55 @@
-# Buidler TypeScript plugin boilerplate
+[![npm](https://img.shields.io/npm/v/@nomiclabs/buidler-web3.svg)](https://www.npmjs.com/package/@nomiclabs/buidler-web3)
+[![buidler](https://buidler.dev/buidler-plugin-badge.svg?1)](https://buidler.dev)
 
-This is a sample Buidler plugin written in TypeScript. Creating a Buidler plugin
-can be as easy as extracting a part of your config into a different file, 
-wrapping it in a function and publishing it to npm.
+# buidler-web3
 
-This sample project contains an example on how to do that, but also comes with 
-many more features:
+This plugin integrates [Web3.js](https://github.com/ethereum/web3.js) `2.x` into [Buidler](http://getbuidler.com).
 
-- A mocha test suit ready to use
-- TravisCI already setup
-- A package.json with scripts and publishing info
-- Examples on how to do different things
+## What
 
-## Installation
+This plugin brings to Buidler the Web3 module and an initialized instance of Web3.
 
-We recommend developing Buidler plugins using yarn. To start working on your 
-project, just run
+# Installation
 
 ```bash
-npm install
+npm install --save-dev @xiawpohr/buidler-web3-v2 web3@2.0.0-alpha.1
 ```
 
-## Plugin development
+And add the following statement to your `buidler.config.js`:
 
-Make sure to read our [Plugin Development Guide](https://buidler.dev/guides/create-plugin.html) 
-to learn how to build a plugin, and our 
-[best practices to create high-quality plugins](https://buidler.dev/documentation/#plugin-development-best-practices).
+```js
+usePlugin("@xiawpohr/buidler-web3-v2");
+```
 
-## Testing
+## Tasks
 
-Running `npm run test` will run every test located in the `test/` folder. They 
-use [mocha](https://mochajs.org) and [chai](https://www.chaijs.com/), 
-but you can customize them.
+This plugin creates no additional tasks.
 
-We recommend creating unit tests for your own modules, and integration tests for 
-the interaction of the plugin with Buidler and its dependencies.
+## Environment extensions
 
-## Linting and autoformat
+This plugin adds the following elements to the `BuidlerRuntimeEnvironment`:
 
-All all of Buidler projects use [prettier](https://prettier.io/) and 
-[tslint](https://palantir.github.io/tslint/).
+- `Web3`: The Web3.js module.
+- `web3`: An instantiated Web3.js object connected to the selected network.
 
-You can check if your code style is correct by running `npm run lint`, and fix 
-it with `npm run lint:fix`.
+## Usage
+Install it and access Web3.js through the Buidler Runtime Environment anywhere you need it (tasks, scripts, tests, etc). For example, in your `buidler.config.js`:
+```
+usePlugin("@nomiclabs/buidler-web3");
 
-## Building the project
+// task action function receives the Buidler Runtime Environment as second argument
+task("accounts", "Prints accounts", async (_, { web3 }) => {
+  
+  console.log(await web3.eth.getAccounts());
+  
+});
 
-Just run `npm run buidl` ️👷‍
+module.exports = {};
+```
+And then run `npx buidler accounts` to try it.
 
-## README file
+Read the documentation on the [Buidler Runtime Environment](https://buidler.dev/documentation/#buidler-runtime-environment-bre) to learn how to access the BRE in different ways to use Web3.js from anywhere the BRE is accessible.
 
-This README describes this boilerplate project, but won't be very useful to your
-plugin users.
+## TypeScript support
 
-Take a look at `README-TEMPLATE.md` for an example of what a Buidler plugin's
-README should look like.
+You need to add this to your `tsconfig.json`'s `files` array: `"node_modules/@xiawpohr/buidler-web3-v2/src/type-extensions.d.ts"`
