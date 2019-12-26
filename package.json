@@ -1,6 +1,6 @@
 {
-  "name": "@nomiclabs/buidler-ts-plugin-boilerplate",
-  "version": "0.0.1",
+  "name": "@xiawpohr/buidler-web3-v2",
+  "version": "0.1.0",
   "description": "Buidler TypeScript plugin boilerplate",
   "repository": "github:nomiclabs/buidler-ts-plugin-boilerplate",
   "author": "Nomic Labs LLC",
@@ -14,12 +14,14 @@
     "buidler-plugin"
   ],
   "scripts": {
-    "lint:fix": "prettier --write 'src/**/*.{js,ts}' 'test/**/*.{js,ts}' && tslint --fix --config tslint.json --project tsconfig.json",
-    "lint": "tslint --config tslint.json --project tsconfig.json",
-    "test": "mocha --exit",
-    "build": "tsc",
-    "buidl": "tsc",
-    "watch": "tsc -w"
+    "lint:fix": "./node_modules/.bin/prettier --write 'src/**/*.{js,ts}' 'test/**/*.{js,ts}' && npm run lint-src -- --fix && npm run lint-tests -- --fix",
+    "lint": "npm run lint-src && npm run lint-tests",
+    "lint-tests": "./node_modules/.bin/tslint --config ./tslint.json --project ./tsconfig.json",
+    "lint-src": "./node_modules/.bin/tslint --config ./tslint.json --project src/tsconfig.json",
+    "test": "./scripts/run-tests.sh",
+    "build": "./node_modules/.bin/tsc --build src",
+    "build-test": "./node_modules/.bin/tsc --build .",
+    "clean": "rm -rf dist build-test"
   },
   "files": [
     "dist/src/",
@@ -35,6 +37,7 @@
     "@types/node": "^8.10.38",
     "chai": "^4.2.0",
     "dotenv": "^6.2.0",
+    "ganache-cli": "^6.7.0",
     "mocha": "^5.2.0",
     "prettier": "^1.17.0",
     "source-map-support": "^0.5.12",
@@ -42,7 +45,8 @@
     "tslint": "^5.16.0",
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.0.1",
-    "typescript": "^3.4.5"
+    "typescript": "^3.4.5",
+    "web3": "^2.0.0-alpha.1"
   },
   "peerDependencies": {
     "@nomiclabs/buidler": "^1.0.1"
